@@ -1,0 +1,18 @@
+<table>
+    <tr>
+        <th> client name</th>
+        <th> status </th>
+        <th> version </th>
+        <th> created </th>
+        <th> updated </th>
+    </tr>
+{% for client in  client_list_on_server %}
+   <tr>
+        <th> {{ client.name  }} </th>
+        <th> {{ client.status }} </th>
+        <th> {{ client.version }} </th>
+        <th> {{ client.created }} </th>
+        <th> {{ client.updated }} </th>
+    </tr>
+{% endfor %}
+</table>

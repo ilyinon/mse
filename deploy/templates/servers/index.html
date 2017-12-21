@@ -1,0 +1,25 @@
+<html><body>
+{% if latest_server_list %}
+<table>
+    <tr>
+        <th> Server name </th>
+        <th> Status </th>
+        <th> Clients </th>
+        <th> Information </th>
+    </tr>
+        {% for server in latest_server_list %}
+
+    <tr>
+        <th><a href="{{server.id}}/detail">{{ server.server_fqdn }}</a></th>
+        <th>{{ server.status }}</th>
+        <th><a href="{{server.id}}">{{ server.num_client }} deployed</a></th>
+        <th>{{ server.info }} </th>
+    </tr>
+
+        {% endfor %}
+
+</table>
+{% else %}
+    <p>No servers are available</p>
+{% endif %}
+</body></html>
