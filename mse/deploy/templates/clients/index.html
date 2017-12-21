@@ -2,23 +2,23 @@
 {% block content %}
 
 {% if client_list %}
-<table>
+<table border="10">
     <tr>
-        <th> name </th>
-        <th> status </th>
-        <th> version </th>
-        <th> hosted_on </th>
-        <th> created </th>
-        <th> updated </th>
+        <td> name </td>
+        <td> status </td>
+        <td> version </td>
+        <td> hosted_on </td>
+        <td> created </td>
+        <td> updated </td>
     </tr>
         {% for client in client_list %}
     <tr>
-        <th><a href="{{client.id}}/">{{ client.name }}</a></th>
-        <th> {{ client.get_status_display }} </th>
-        <th> {{ client.version }} </th>
-        <th> <a href="{{ client.hosted_on_id }}"> {{ client.hosted_on }} </a> </th>
-        <th> {{ client.created }} </th>
-        <th> {{ client.updated }} </th>
+        <td><a href="{{client.id}}/">{{ client.name }}</a></td>
+        <td> {{ client.get_status_display }} </td>
+        <td> {{ client.version }} </td>
+        <td> <a href="{{ client.hosted_on_id }}"> {{ client.hosted_on }} </a> </td>
+        <td> {{ client.created|date:'Y-m-d' }} </td>
+        <td> {{ client.updated|date:'Y-m-d' }} </td>
     </tr>
         {% endfor %}
 

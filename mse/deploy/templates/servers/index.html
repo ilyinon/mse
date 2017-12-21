@@ -1,20 +1,20 @@
 {% extends "../common/header.html %}
 {% block content %}
 {% if server_list %}
-<table>
+<table border="10">
     <tr>
-        <th> Server name </th>
-        <th> Status </th>
-        <th> Clients </th>
-        <th> Information </th>
+        <td> Server name </td>
+        <td> Status </td>
+        <td> Clients </td>
+        <td> Information </td>
     </tr>
         {% for server in server_list %}
 
     <tr>
-        <th><a href="{{server.id}}/detail">{{ server.name }}</a></th>
-        <th>{{ server.get_status_display  }}</th>
-        <th><a href="{{server.id}}">{{ server.num_client }} deployed</a></th>
-        <th>{{ server.info }} </th>
+        <td><a href="{{server.id}}/detail">{{ server.name }}</a></td>
+        <td>{{ server.get_status_display  }}</td>
+        <td><a href="{{server.id}}">{{ server.num_client }} deployed</a></td>
+        <td>{{ server.info }} </td>
     </tr>
 
         {% endfor %}

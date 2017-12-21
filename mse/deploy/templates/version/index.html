@@ -1,18 +1,18 @@
 {% extends "../common/header.html %}
 {% block content %}
 {% if version_list %}
-<table>
+<table border="10">
     <tr>
-        <th> Version</th>
-        <th> Status </th>
-        <th> created </th>
+        <td> Version</td>
+        <td> Status </td>
+        <td> created </td>
     </tr>
         {% for version in version_list %}
 
     <tr>
-        <th>{{ version.name }}</th>
-        <th>no status</th>
-        <th>{{ version.created }} </th>
+        <td>{{ version.name }}</td>
+        <td>no status</td>
+        <td>{{ version.created }} </td>
     </tr>
 
         {% endfor %}
