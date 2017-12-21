@@ -1,0 +1,33 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'pass'
+      POSTGRES_DB: 'objectstorage'
+    restart: always
+
+
+  backend:
+    build:
+        context: ./
+        dockerfile: ./Dockerfile
+    image: django_image
+    restart: always
+    volumes:
+      - /data/backups:/var/backups/revel
+      - /code
+    depends_on:
+      - db
+
+  nginx:
+    build:
+        context: ./
+        dockerfile: nginx.Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes_from:
+      - backend
+    restart: always
