@@ -1,5 +1,6 @@
-<html><body>
-{% if latest_server_list %}
+{% extends "../common/header.html %}
+{% block content %}
+{% if server_list %}
 <table>
     <tr>
         <th> Server name </th>
@@ -7,11 +8,11 @@
         <th> Clients </th>
         <th> Information </th>
     </tr>
-        {% for server in latest_server_list %}
+        {% for server in server_list %}
 
     <tr>
-        <th><a href="{{server.id}}/detail">{{ server.server_fqdn }}</a></th>
-        <th>{{ server.status }}</th>
+        <th><a href="{{server.id}}/detail">{{ server.name }}</a></th>
+        <th>{{ server.get_status_display  }}</th>
         <th><a href="{{server.id}}">{{ server.num_client }} deployed</a></th>
         <th>{{ server.info }} </th>
     </tr>
@@ -22,4 +23,19 @@
 {% else %}
     <p>No servers are available</p>
 {% endif %}
-</body></html>
+
+<form action="/server/add" method="post">
+    {% csrf_token %}
+    <th>Server name</th>
+
+    </tr>
+    <tr>
+        <th>{{ form.name }}
+            </th>
+        </th>
+    <tr>
+    <th><input type="submit" value="Create"></th>
+        </tr>
+</form>
+
+{% endblock %}

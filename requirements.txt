@@ -1,0 +1,4 @@
+django==2.0
+pycrypto==2.6.1
+psutil==5.4.2
+psycopg2

@@ -1,0 +1,10 @@
+<table>
+    <tr>
+        <td><a href="{% url 'index_main'%}">Main page</a></td>
+        <td><a href="{% url 'server_index' %}">Servers</a></td>
+        <td><a href="{% url 'client_index' %}">Clients</a></td>
+        <td><a href="{% url 'version_index' %}">Versions</a></td>
+    </tr>
+</table>
+{% block content %}
+{% endblock %}

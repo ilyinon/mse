@@ -12,6 +12,13 @@ class Version(models.Model):
     def __str__(self):
         return self.name
 
+class Region(models.Model):
+
+    name = models.CharField(max_length=50)
+    created = models.DateTimeField('date created', db_index=True)
+
+    def __str__(self):
+        return self.name
 
 class Server(models.Model):
 
@@ -21,6 +28,7 @@ class Server(models.Model):
     DEPLOYING = 3
     MAINTAIN = 4
     NEW = 5
+
     STATUS_SERVER = (
         (STOP, 'stopped'),
         (OPERATE, 'started'),

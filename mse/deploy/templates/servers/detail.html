@@ -1,7 +1,20 @@
-<h1> {{ server_info }}</h1>
+{% extends "../common/header.html %}
+{% block content %}
+<table border 1>
+    <tr>
+        <td>server name</td>
+        <td>status</td>
+        <td>updated</td>
+        <td>created</td>
+        <td>information</td>
+    </tr>
+    <tr>
+        <td>{{ server_info.name }}</td>
+        <td>{{server_info.get_status_display }}</td>
+        <td>{{server_info.updated}}</td>
+        <td>{{server_info.created}}</td>
+        <td>{{server_info.info}}</td>
+    </tr>
 
-<ul>Server name: {{ server_info.server_fqdn }}</ul>
-<ul>Updated: {{ server_info.created }}</ul>
-<ul>Created: {{ server_info.updated }}</ul>
-<ul>Status: {{ server_info.status }}</ul>
-<ul>Info: {{ server_info.info }}</ul>
+</table>
+{% endblock %}
