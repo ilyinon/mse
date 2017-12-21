@@ -49,21 +49,21 @@
 
 <br><br>
 <table border="1">
-    <tr><th>Adding new customer:</th></tr>
+    <tr><td>Adding new customer:</td></tr>
     <tr>
 <form action="/client/add" method="post">
     {% csrf_token %}
-    <th>Customer name</th>
-    <th>Hosted on</th>
+    <td>Customer name</td>
+    <td>Hosted on</td>
+    <td>Version</td>
     </tr>
     <tr>
         <th>{{ form.name }}
             </th>
         <th>
             {{ form.hosted_on }}
-
-
         </th>
+        <th>{{ form.version }}</th>
     <tr>
     <th><input type="submit" value="Create"></th>
         </tr>

@@ -13,5 +13,6 @@ urlpatterns = [
     path('client/<int:client_id>/', views.client, name='detail'),
     path('client/add', views.add_new_client, name='add_new_client'),
     path('server/add', views.add_new_server, name='add_new_server'),
+    path('version/add', views.add_new_version, name='add_new_version'),
 
 ]

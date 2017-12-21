@@ -5,12 +5,25 @@ from django.utils import timezone
 
 
 class Version(models.Model):
+    DEPRECATED = 0
+    DEVELOPMENT = 1
+    TESTING = 2
+    ACTUAL = 3
+
+    STATUS_VERSION = (
+        (DEPRECATED, 'deprecated version'),
+        (DEVELOPMENT, 'under development'),
+        (TESTING, 'under testing'),
+        (ACTUAL, 'producation ready'),
+    )
 
     name = models.CharField(max_length=20)
-    created = models.DateTimeField('date created', db_index=True)
+    status = models.PositiveSmallIntegerField(choices=STATUS_VERSION, default='1', db_index=True)
+    created = models.DateTimeField('date created', default=timezone.now(), db_index=True)
 
     def __str__(self):
         return self.name
+
 
 class Region(models.Model):
 
@@ -19,6 +32,7 @@ class Region(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Server(models.Model):
 
@@ -39,9 +53,9 @@ class Server(models.Model):
     )
 
     name = models.CharField(max_length=200)
-    created = models.DateTimeField('date published', db_index=True)
-    updated = models.DateTimeField('date published')
-    status = models.PositiveSmallIntegerField(choices=STATUS_SERVER, db_index=True)
+    created = models.DateTimeField('date published', default=timezone.now(), db_index=True)
+    updated = models.DateTimeField('date published', default=timezone.now())
+    status = models.PositiveSmallIntegerField(choices=STATUS_SERVER, default=5, db_index=True)
     info = models.CharField(max_length=500)
 
     def __str__(self):
@@ -72,10 +86,10 @@ class Client(models.Model):
     )
 
     name = models.CharField(max_length=100)
-    created = models.DateTimeField('date created', db_index=True)
-    updated = models.DateTimeField('date updated')
+    created = models.DateTimeField('date created', default=timezone.now(), db_index=True)
+    updated = models.DateTimeField('date updated', default=timezone.now())
     hosted_on = models.ForeignKey(Server, on_delete=models.CASCADE)
-    status = models.PositiveSmallIntegerField(choices=STATUS_CLIENT, db_index=True)
+    status = models.PositiveSmallIntegerField(choices=STATUS_CLIENT, default=5, db_index=True)
     version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
     def __str__(self):

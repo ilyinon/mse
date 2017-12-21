@@ -1,5 +1,38 @@
 {% extends "../common/header.html %}
 {% block content %}
+{% if version_list %}
+<table>
+    <tr>
+        <th> Version</th>
+        <th> Status </th>
+        <th> created </th>
+    </tr>
+        {% for version in version_list %}
 
-Under development
+    <tr>
+        <th>{{ version.name }}</th>
+        <th>no status</th>
+        <th>{{ version.created }} </th>
+    </tr>
+
+        {% endfor %}
+
+</table>
+{% else %}
+    <p>No servers are available</p>
+{% endif %}
+
+<form action="/version/add" method="post">
+    {% csrf_token %}
+    <th>Version name</th>
+
+    </tr>
+    <tr>
+        <th>{{ form.name }}
+            </th>
+        </th>
+    <tr>
+    <th><input type="submit" value="Create"></th>
+        </tr>
+</form>
 {% endblock %}

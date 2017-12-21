@@ -5,7 +5,7 @@ from django.db.models import Count
 from . import forms
 from django.utils import timezone
 
-from .models import Server, Client
+from .models import Server, Client, Version
 
 
 def index_main(request):
@@ -42,8 +42,11 @@ def client_index(request):
     return render(request, 'clients/index.html', context)
 
 def version_index(request):
+    version_list = Version.objects.annotate().order_by('name')
+    form = forms.VersionListForm()
     context ={
-        'version_list': "none"
+        'form': form,
+        'version_list': version_list,
     }
     return render(request, 'version/index.html', context)
 
@@ -76,7 +79,7 @@ def add_new_client(request):
             f = form.save(commit=False)
             f.created = timezone.now()
             f.updated = timezone.now()
-            f.version = 0
+
             f.status = 5
 
             f.save()
@@ -98,4 +101,14 @@ def add_new_server(request):
             f.save()
             return HttpResponseRedirect('/server')
 
+    return HttpResponseRedirect()
+
+
+def add_new_version(request):
+    if request.method == 'POST':
+        form = forms.VersionListForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.save()
+            return HttpResponseRedirect('/version')
     return HttpResponseRedirect()
