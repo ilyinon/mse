@@ -3,21 +3,18 @@ services:
   db:
     image: postgres:9.6
     environment:
-      POSTGRES_USER: 'user'
-      POSTGRES_PASSWORD: 'pass'
-      POSTGRES_DB: 'objectstorage'
+      POSTGRES_USER: 'mseuser'
+      POSTGRES_PASSWORD: 'msepass'
+      POSTGRES_DB: 'mse'
     restart: always
 
 
-  backend:
+  mse:
     build:
         context: ./
         dockerfile: ./mse.Dockerfile
     image: django_image
     restart: always
-    volumes:
-      - /data/backups:/var/backups/revel
-      - /code
     depends_on:
       - db
 
