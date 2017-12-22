@@ -5,6 +5,7 @@
     <tr>
         <td>server name</td>
         <td>status</td>
+        <td>action</td>
         <td>updated</td>
         <td>created</td>
         <td>information</td>
@@ -12,6 +13,7 @@
     <tr>
         <td>{{ server_info.name }}</td>
         <td>{{server_info.get_status_display }}</td>
+        <td>{{server_info.get_action_display }}</td>
         <td>{{server_info.updated}}</td>
         <td>{{server_info.created}}</td>
         <td>{{server_info.info}}</td>

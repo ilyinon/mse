@@ -23,4 +23,4 @@ class VersionListForm(ModelForm):
 class ServerChangeStatus(ModelForm):
     class Meta:
         model = Server
-        fields = ('status',)
+        fields = ('action',)

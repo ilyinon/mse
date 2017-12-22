@@ -57,6 +57,7 @@ class Server(models.Model):
     action_DEPLOY = 2
     action_MAINTAIN = 3
     action_DELETE = 4
+    action_NONE = 5
 
     ACTION_SERVER =(
         (action_START, 'start server'),
@@ -64,6 +65,7 @@ class Server(models.Model):
         (action_DEPLOY, 'deploy server'),
         (action_MAINTAIN, 'send to maintain'),
         (action_DELETE, 'delete server'),
+        (action_NONE, 'none'),
     )
 
     name = models.CharField(max_length=200, unique=True)
@@ -71,7 +73,7 @@ class Server(models.Model):
     updated = models.DateTimeField('date published', default=timezone.now())
     status = models.PositiveSmallIntegerField(choices=STATUS_SERVER, default=5, db_index=True)
     info = models.CharField(max_length=500)
-    action = models.PositiveSmallIntegerField(choices=ACTION_SERVER, db_index=True, null=True)
+    action = models.PositiveSmallIntegerField(choices=ACTION_SERVER, db_index=True, default=5)
 
     def __str__(self):
         return self.name

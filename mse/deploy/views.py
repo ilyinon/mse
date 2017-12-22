@@ -59,7 +59,7 @@ def server_detail(request, server_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/server')
-        return HttpResponseRedirect()
+        return HttpResponseRedirect('/server')
     form = forms.ServerChangeStatus()
     context = {
         'form': form,
