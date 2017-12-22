@@ -1,6 +1,7 @@
 {% extends "../common/header.html %}
 {% block content %}
-<table border 1>
+
+<table border="10">
     <tr>
         <td>server name</td>
         <td>status</td>
@@ -15,6 +16,15 @@
         <td>{{server_info.created}}</td>
         <td>{{server_info.info}}</td>
     </tr>
-
 </table>
+<br>
+<form action="{% url 'server_detail' server_info.id %}" method="post">
+    {% csrf_token %}
+
+        <td>{{ form }}
+        <input type="submit" value="Update">{{ form.name }}
+            </td>
+</form>
+
+
 {% endblock %}

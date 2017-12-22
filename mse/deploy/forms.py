@@ -19,3 +19,8 @@ class VersionListForm(ModelForm):
         model = Version
         fields = ('name',)
 
+
+class ServerChangeStatus(ModelForm):
+    class Meta:
+        model = Server
+        fields = ('status',)

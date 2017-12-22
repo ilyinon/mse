@@ -41,6 +41,7 @@ def client_index(request):
     }
     return render(request, 'clients/index.html', context)
 
+
 def version_index(request):
     version_list = Version.objects.annotate().order_by('name')
     form = forms.VersionListForm()
@@ -50,10 +51,18 @@ def version_index(request):
     }
     return render(request, 'version/index.html', context)
 
+
 def server_detail(request, server_id):
     server_info = get_object_or_404(Server, pk=server_id)
-
+    if request.method == 'POST':
+        form = forms.ServerChangeStatus(request.POST, instance=server_info)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/server')
+        return HttpResponseRedirect()
+    form = forms.ServerChangeStatus()
     context = {
+        'form': form,
         'server_info': server_info,
     }
     return render(request, 'servers/detail.html', context)
@@ -69,19 +78,12 @@ def client(request, client_id):
 
 def add_new_client(request):
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
         form = forms.ClientListForm(request.POST)
-        # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
             f = form.save(commit=False)
             f.created = timezone.now()
             f.updated = timezone.now()
-
             f.status = 5
-
             f.save()
             return HttpResponseRedirect('/client')
 
@@ -96,7 +98,6 @@ def add_new_server(request):
             f.created = timezone.now()
             f.updated = timezone.now()
             f.info = "none"
-            f.status = 5
 
             f.save()
             return HttpResponseRedirect('/server')
@@ -112,3 +113,5 @@ def add_new_version(request):
             f.save()
             return HttpResponseRedirect('/version')
     return HttpResponseRedirect()
+
+
