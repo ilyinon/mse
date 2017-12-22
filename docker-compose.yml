@@ -12,7 +12,7 @@ services:
   backend:
     build:
         context: ./
-        dockerfile: ./Dockerfile
+        dockerfile: ./mse.Dockerfile
     image: django_image
     restart: always
     volumes:
@@ -27,7 +27,4 @@ services:
         dockerfile: nginx.Dockerfile
     ports:
       - 80:80
-      - 443:443
-    volumes_from:
-      - backend
     restart: always
