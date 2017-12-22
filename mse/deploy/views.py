@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Count
 from . import forms
 from django.utils import timezone
+from .tasks import deploy_server
 
 from .models import Server, Client, Version
 
@@ -58,6 +59,8 @@ def server_detail(request, server_id):
         form = forms.ServerChangeStatus(request.POST, instance=server_info)
         if form.is_valid():
             form.save()
+
+            deploy_server.delay(server_info.id)
             return HttpResponseRedirect('/server')
         return HttpResponseRedirect('/server')
     form = forms.ServerChangeStatus()
