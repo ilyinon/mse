@@ -36,27 +36,42 @@ class Region(models.Model):
 
 class Server(models.Model):
 
-    STOP = 0
-    OPERATE = 1
-    FAIL = 2
-    DEPLOYING = 3
-    MAINTAIN = 4
-    NEW = 5
+    status_STOP = 0
+    status_OPERATE = 1
+    status_FAIL = 2
+    status_DEPLOYING = 3
+    status_MAINTAIN = 4
+    status_NEW = 5
 
     STATUS_SERVER = (
-        (STOP, 'stopped'),
-        (OPERATE, 'started'),
-        (FAIL, 'failed'),
-        (DEPLOYING, 'under deploying'),
-        (MAINTAIN, 'under maintaining'),
-        (NEW, 'just created'),
+        (status_STOP, 'stopped'),
+        (status_OPERATE, 'operate'),
+        (status_FAIL, 'failed'),
+        (status_DEPLOYING, 'under deploying'),
+        (status_MAINTAIN, 'under maintaining'),
+        (status_NEW, 'just created'),
     )
 
-    name = models.CharField(max_length=200)
+    action_STOP = 0
+    action_START = 1
+    action_DEPLOY = 2
+    action_MAINTAIN = 3
+    action_DELETE = 4
+
+    ACTION_SERVER =(
+        (action_START, 'start server'),
+        (action_STOP, 'stop server'),
+        (action_DEPLOY, 'deploy server'),
+        (action_MAINTAIN, 'send to maintain'),
+        (action_DELETE, 'delete server'),
+    )
+
+    name = models.CharField(max_length=200, unique=True)
     created = models.DateTimeField('date published', default=timezone.now(), db_index=True)
     updated = models.DateTimeField('date published', default=timezone.now())
     status = models.PositiveSmallIntegerField(choices=STATUS_SERVER, default=5, db_index=True)
     info = models.CharField(max_length=500)
+    action = models.PositiveSmallIntegerField(choices=ACTION_SERVER, db_index=True, null=True)
 
     def __str__(self):
         return self.name
@@ -85,7 +100,7 @@ class Client(models.Model):
         (NEW, 'just created'),
     )
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     created = models.DateTimeField('date created', default=timezone.now(), db_index=True)
     updated = models.DateTimeField('date updated', default=timezone.now())
     hosted_on = models.ForeignKey(Server, on_delete=models.CASCADE)
