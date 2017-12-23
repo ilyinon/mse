@@ -1,4 +1,7 @@
 django==2.0
+celery==4.1.0
 pycrypto==2.6.1
 psutil==5.4.2
 psycopg2
+django-celery-results==1.0.1
+redis==2.10.6
