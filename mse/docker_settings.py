@@ -117,7 +117,7 @@ DATABASES = {
         'NAME': 'mse',
         'USER': 'mseuser',
         'PASSWORD': 'msepass',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '',
     }
 }
