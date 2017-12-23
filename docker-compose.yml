@@ -29,3 +29,9 @@ services:
   redis:
     image: redis:4.0.6
     restart: always
+
+  celery:
+    image: celery:4.0.2
+    restart: always
+    depends_on:
+      - redis
