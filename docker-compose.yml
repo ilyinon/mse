@@ -31,7 +31,10 @@ services:
     restart: always
 
   celery:
-    image: celery:4.0.2
+#    image: celery:4.0.2
+    build:
+      context: ./
+      dockerfile: celery.Dockerfile
     restart: always
     depends_on:
       - redis

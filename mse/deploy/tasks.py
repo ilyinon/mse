@@ -21,7 +21,7 @@ def xsum(numbers):
 
 @shared_task
 def deploy_server(server_id):
-    time.sleep(1)
+#    time.sleep(1)
     server = Server.objects.get(id=server_id)
     server.action = 5
     server.status = 3

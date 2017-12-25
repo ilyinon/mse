@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CELERY_BROKER_URL = 'redis://celery//'
+CELERY_BROKER_URL = 'redis://redis:6379/1'
 
 CELERY_RESULT_BACKEND = 'django-db'
 CACHES = {
